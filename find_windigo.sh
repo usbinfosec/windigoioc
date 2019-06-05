@@ -8,7 +8,7 @@ if [ ! "${LIBLOC}" = "" ]; then
   
   lines=$(wc -l <<< "${output}" | cut -d" " -f 1)
   
-  if [ ${lines} -gt 2 ]; then
+  if [ ${lines} -gt 1 ]; then
     printf "You probably have a problem, more than one NEEDED symbol is present\n> %s\n" "${output}"
   else
     printf "You seem to be ok\n"
