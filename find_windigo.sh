@@ -1,6 +1,29 @@
 #!/bin/bash
 
 library=libkeyutils.so.1
+LIBLOC=""
+
+# Usage Text
+function Usage()
+{
+  echo -e "********************************************************"
+  echo -e "* find_windigo : Script to detect windigo IOC/Infection
+  echo -e "********************************************************"
+  echo -e "\n-h\tThis message\"
+  echo -e "-f [name of library to hunt for] (optional)"
+}
+
+#
+# Main Loop
+#
+
+while getopts "hf:" OPT; do
+  case "${OPT}" in
+  "h")  Usage; exit 0 ;;
+  "f")  library="${OPTARG}" ;;
+  esac
+done
+
 LIBLOC=$(whereis ${library} | cut -d":" -f2 | tr -d " ")
 
 if [ ! "${LIBLOC}" = "" ]; then
