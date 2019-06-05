@@ -6,7 +6,7 @@ LIBLOC=$(whereis ${library} | cut -d":" -f2 | tr -d " ")
 if [ ! "${LIBLOC}" = "" ]; then
   output=$(objdump -x "${LIBLOC}" | grep NEEDED)
   
-  lines=$(wc -l | cut -d" " -f 1 <<< "${output}")
+  lines=$(wc -l <<< "${output}" | cut -d" " -f 1)
   
   if [ ${lines} -gt 2 ]; then
     printf "You probably have a problem, more than one NEEDED symbol is present\n> %s\n" "${output}"
